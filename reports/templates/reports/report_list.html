@@ -1,0 +1,18 @@
+{% extends 'reports/base.html' %}
+{% block content %}
+<h4>Submitted Reports</h4>
+{% for report in reports %}
+<div class="card mb-3 shadow-sm">
+  <div class="card-body">
+    <h5>{{ report.title }} <small class="text-muted">({{ report.category|capfirst }})</small></h5>
+    <p>{{ report.description }}</p>
+    <p><small>Submitted by: {{ report.submitted_by }} | {{ report.created_at|date:"M d, Y H:i" }}</small></p>
+    {% if report.attachment %}
+      <a href="{{ report.attachment.url }}" class="btn btn-sm btn-outline-primary" download>Download Attachment</a>
+    {% endif %}
+  </div>
+</div>
+{% empty %}
+  <p>No reports submitted yet.</p>
+{% endfor %}
+{% endblock %}
